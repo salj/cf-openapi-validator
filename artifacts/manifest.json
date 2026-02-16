@@ -1,0 +1,989 @@
+{
+  "source": "immich-app/immich",
+  "schemaPath": "open-api/immich-openapi-specs.json",
+  "latestTag": "v2.5.6",
+  "updatedAt": "2026-02-16T04:39:11.812Z",
+  "missingSchemaCutoffTag": "v1.92.1",
+  "tags": {
+    "v2.5.6": {
+      "schemaHash": "8a063eb2dbc3bb040c31bc4c907ca4eed418d38a9e18a09c97c00f23d9080030",
+      "validatorCount": 189,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:11.812Z"
+    },
+    "v2.5.5": {
+      "schemaHash": "bf5b395924653535ed97b069ece4eb2a93f81200cabc8efb0d47008f6a9ae81a",
+      "validatorCount": 189,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:12.197Z"
+    },
+    "v2.5.3": {
+      "schemaHash": "fa92c6f7515ec250f9077a8e4284f4f41ca9772868e7ec5d497d0c78f3e7813b",
+      "validatorCount": 189,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:12.590Z"
+    },
+    "v2.5.2": {
+      "schemaHash": "aae2a1f7b3b72a3c7a63810691bb4f5045e96862693058aafea3c33e28c938be",
+      "validatorCount": 189,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:12.911Z"
+    },
+    "v2.5.0": {
+      "schemaHash": "05921700cd9b16994c019d85d1fdf3eed9c0aa7a47ec8f9c5c64350144accbe1",
+      "validatorCount": 189,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:13.181Z"
+    },
+    "v2.4.1": {
+      "schemaHash": "9e372a7f732115b724b7a40f55728929cf430d76f38b45f1d57cdb8e78121389",
+      "validatorCount": 180,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:13.519Z"
+    },
+    "v2.4.0": {
+      "schemaHash": "3d67dc772030b94d459af007b528918dbde50652db9d41284939039374be6b82",
+      "validatorCount": 180,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:13.791Z"
+    },
+    "v2.3.1": {
+      "schemaHash": "f3c70460b356c65ec64f766ff057075ce13e0d7c4b040e1c3b69a012f3130a4e",
+      "validatorCount": 176,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:14.084Z"
+    },
+    "v2.3.0": {
+      "schemaHash": "be0ba5590404592cd894866f6c926e0b80a43f14d978db15f3fbe5adfb9f529a",
+      "validatorCount": 176,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:14.384Z"
+    },
+    "v2.2.3": {
+      "schemaHash": "4000b3837c9562b9c4afbc49b231483f122f16e3b5906a467f8a1c8e8158c1e9",
+      "validatorCount": 169,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:14.611Z"
+    },
+    "v2.2.2": {
+      "schemaHash": "39272a6dec90a6795c34e5876b5a6aff9a9349da004122dd719f47548459af86",
+      "validatorCount": 169,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:14.859Z"
+    },
+    "v2.2.1": {
+      "schemaHash": "5bc2215126ac2b3c6c2e3cebf0df70cad6d4d107372d35c56c381cb2bb4098d7",
+      "validatorCount": 169,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:15.130Z"
+    },
+    "v2.2.0": {
+      "schemaHash": "badebe27206e31b91667646d85949d545430951fcdc020eb8ede3e900712943e",
+      "validatorCount": 169,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:15.421Z"
+    },
+    "v2.1.0": {
+      "schemaHash": "107befc3a8902e00bfc9e1beadae797cd8bb65eef349aaeb764b6c4b59ff5474",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:15.684Z"
+    },
+    "v2.0.1": {
+      "schemaHash": "2bd6cb0adba40d89e942da0a80cff30aedd07b3109d6f37dc2bc43d01f88c542",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:15.988Z"
+    },
+    "v2.0.0": {
+      "schemaHash": "9fac5cedd34473a55cea926409ef196b1f46e5713b516b4fec0583cdd52589a3",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:16.249Z"
+    },
+    "v1.144.1": {
+      "schemaHash": "0bcf932c75d99fb1db3ccb541a66da7080cf616e3bc5f047ecf9338890b15faf",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:16.490Z"
+    },
+    "v1.143.1": {
+      "schemaHash": "a3ff2a2b68b32645553da71c9ea7a9856a3e09e09213e186bb69c1dd2a4b3b5c",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:16.742Z"
+    },
+    "v1.143.0": {
+      "schemaHash": "c5573895f42d81590020bf588ef3409786a7c19146ac9598e1ae2132620dfeeb",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:17.040Z"
+    },
+    "v1.142.1": {
+      "schemaHash": "ccacfef1ca1a736db6f5be6c1eacc08af62d1ff5c25847d04f2684266caa40d4",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:17.294Z"
+    },
+    "v1.142.0": {
+      "schemaHash": "4021a41314d236713ed7d03784d532120505f0cc0b60bd3cf82f62933fb6c000",
+      "validatorCount": 167,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:17.585Z"
+    },
+    "v1.141.1": {
+      "schemaHash": "590ad76eb3e34a1703941c18df2a6ad8424552cff593ee8a00688611aca45410",
+      "validatorCount": 166,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:17.811Z"
+    },
+    "v1.140.1": {
+      "schemaHash": "e2db78f9575b92e2b6046eaec141c7db9833813c0cd423aee8c22e8ecfcefaf8",
+      "validatorCount": 166,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:18.108Z"
+    },
+    "v1.140.0": {
+      "schemaHash": "a2d11c8b8a3d6ffcab5ad8b85cb8928685ffb8bc4a05adf68222f3a567ab97d0",
+      "validatorCount": 166,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:18.368Z"
+    },
+    "v1.139.4": {
+      "schemaHash": "9f0b79e5d89a2d32460a4c26292b3c24f3a13dfb9ec659a60743a289d5b49f9f",
+      "validatorCount": 163,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:18.638Z"
+    },
+    "v1.139.3": {
+      "schemaHash": "258fd060e3deb903e495df1ff0a0d31030d6161357688aa7fd706081f28b8447",
+      "validatorCount": 163,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:18.883Z"
+    },
+    "v1.139.2": {
+      "schemaHash": "10ed890b827ffb47ed1f91061bf7aee49d57193d8f6154a3577d6e2900a3d7aa",
+      "validatorCount": 163,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:19.150Z"
+    },
+    "v1.138.1": {
+      "schemaHash": "0111c21a2d7c8c3792cd69de9cd3b7e025825dc98c883bf39b4f2e467626b622",
+      "validatorCount": 161,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:19.427Z"
+    },
+    "v1.138.0": {
+      "schemaHash": "bb826750016bac425c8dccf8850bb321bcc839dfa2f842564aca083b594589eb",
+      "validatorCount": 161,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:19.682Z"
+    },
+    "v1.137.3": {
+      "schemaHash": "5ce2632ef92d2be360887a589eb89cabbdbbc1d0bea9d7935bbda7b489456c6e",
+      "validatorCount": 161,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:19.949Z"
+    },
+    "v1.137.1": {
+      "schemaHash": "3e2f7ff5ed0320ce132594a4c840576960c47745f2dffbad40731689e52b2c3f",
+      "validatorCount": 161,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:20.356Z"
+    },
+    "v1.137.0": {
+      "schemaHash": "d7b9ba2fedfbc26cb03047887b998e4ebbc542b973ed2f086753f0cb644e44d6",
+      "validatorCount": 161,
+      "packCount": 6,
+      "generatedAt": "2026-02-16T04:39:20.759Z"
+    },
+    "v1.136.0": {
+      "schemaHash": "3a4597db13199fafcfd47d1de59c031de43706b523b42f09326c93f3372848a9",
+      "validatorCount": 160,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:21.162Z"
+    },
+    "v1.135.3": {
+      "schemaHash": "f01b526cf935237f0a09898767e9b35d513a88df27f6dd86688471b3efe64313",
+      "validatorCount": 159,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:21.567Z"
+    },
+    "v1.135.2": {
+      "schemaHash": "eca7c7065bc17e294ef8dd15570711f73e8b4d585b5db0a3ea58bd4ffe812a24",
+      "validatorCount": 159,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:21.954Z"
+    },
+    "v1.135.1": {
+      "schemaHash": "06aea73b5cac3217e00e41569392169f0ac7e38221579729a251dea9928b4443",
+      "validatorCount": 159,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:22.331Z"
+    },
+    "v1.135.0": {
+      "schemaHash": "67b7eb5dd35b8d54ef3c93ae160e85865090ac87ae7ff3b9b9f4ef02a9ee4a6d",
+      "validatorCount": 159,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:22.757Z"
+    },
+    "v1.134.0": {
+      "schemaHash": "48026e8e9ebd9d1eb37c2fb7728119fbe8bf9afba36b0eb9d3f55321ee1bd931",
+      "validatorCount": 154,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:23.179Z"
+    },
+    "v1.133.1": {
+      "schemaHash": "bb25f100527ef6535062fae09630211f4af0c0dc1bc18ca193e103f22ec9b261",
+      "validatorCount": 152,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:23.646Z"
+    },
+    "v1.133.0": {
+      "schemaHash": "7fec66af18ccf9d724ef1377a71a9ab12a6ee13f3d8e7f6f7a68507360e9bdca",
+      "validatorCount": 152,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:24.017Z"
+    },
+    "v1.132.3": {
+      "schemaHash": "1765e2f416db74adebe952bb6f09f416e379143419c4ebb3d1d34262d743d40f",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:24.431Z"
+    },
+    "v1.132.1": {
+      "schemaHash": "b18b62002e3a7ad5b70a512e36edb6f65278b35ac609c0ef61603ce8fb6d0f56",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:24.809Z"
+    },
+    "v1.132.0": {
+      "schemaHash": "ad309a33217ce66b43935c8dd8bf028622fb581275ea4ee4ef571c94253f2f10",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:25.178Z"
+    },
+    "v1.131.3": {
+      "schemaHash": "8160e61b7d50d98b9cb1065f2adf2dd3503d7c9ecdf8ce207c69a0ecc3ddf90b",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:25.568Z"
+    },
+    "v1.131.2": {
+      "schemaHash": "adccb3421040fa9e3bd4c9cc865cbf2b745734e986c75efba6c19758256c1bb9",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:25.958Z"
+    },
+    "v1.131.1": {
+      "schemaHash": "c9241f648ce7812c77409350834506afbc6ef9688f8252c0e98d544595bb878d",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:26.370Z"
+    },
+    "v1.131.0": {
+      "schemaHash": "d3e1b35d09a356b91a73dbbeab60a9392434a3c20696c67b1efcf6b5fc6b431c",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:26.740Z"
+    },
+    "v1.130.3": {
+      "schemaHash": "d72b9dcfa2e75b5247a4c9e3dfe1563e777be3ee0414358524974694c04af4d4",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:27.104Z"
+    },
+    "v1.130.2": {
+      "schemaHash": "c04a26b2672506be41496fa74bdab3fb4638ea4b56f833f1f0ba87c45f7e2838",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:27.499Z"
+    },
+    "v1.130.1": {
+      "schemaHash": "2b99e0e973436349472b3719271c5ee9dddd56d24bcfe0d3625b6a79d02100bc",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:27.879Z"
+    },
+    "v1.130.0": {
+      "schemaHash": "eb3642dbcf70548a8932d5de5c74e53464a4982b1c0a804ea6c26397c27d814e",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:28.253Z"
+    },
+    "v1.129.0": {
+      "schemaHash": "5d6c861d8cba30d4097025c554855808db16386040fc82ab627ed44f39665c46",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:28.601Z"
+    },
+    "v1.128.0": {
+      "schemaHash": "f22e4dbf5bf62112d7b76586e89d5a34e6d7f07e7cd4a1ee869de1e797ee3dbf",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:28.965Z"
+    },
+    "v1.127.0": {
+      "schemaHash": "f0aad14c427a3b7810228822a2d067c97cc712f051144657394a1aea815ac7bc",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:29.370Z"
+    },
+    "v1.126.1": {
+      "schemaHash": "93d43ee2db9cd11949bbf0c3232ca1b07f66161e363eb3086cbf3956ebe348c8",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:29.754Z"
+    },
+    "v1.126.0": {
+      "schemaHash": "5fdfcd4ee643e646e70292a61de335f933c91e71231bd43382dd2a009f500c62",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:30.136Z"
+    },
+    "v1.125.7": {
+      "schemaHash": "477976d91fa416a4449b2fd9b21addbcc3b4df08b57327cb7b0ce436940bf1fb",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:30.527Z"
+    },
+    "v1.125.6": {
+      "schemaHash": "72ab6625b47d56ba05cb82d0fbe1da4d19dd7515544b5d7a21dd6b0e033ebd44",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:30.932Z"
+    },
+    "v1.125.5": {
+      "schemaHash": "ed1f4c4fcb98c380fa49c15db67c74cfc5a1543e5b0b5e78ed3697ab28c5ad9e",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:31.317Z"
+    },
+    "v1.125.3": {
+      "schemaHash": "56c1270eb3e752cc416394aff35101d3e310623d0b71b47f7bd6f5163942e37a",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:31.721Z"
+    },
+    "v1.125.2": {
+      "schemaHash": "3b2fab48c17ad759978e70805d310d50514dddca72c65d9bd59e0028fbce67f2",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:32.100Z"
+    },
+    "v1.125.1": {
+      "schemaHash": "d559e92372f984a195a19593ed05ac7261f2bbdea913ea65658e686343479c02",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:32.436Z"
+    },
+    "v1.124.2": {
+      "schemaHash": "7f13da9cb780ddea164637623efb8e13fdea52c2e953a5c1ad36c8fd051f781d",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:32.824Z"
+    },
+    "v1.124.1": {
+      "schemaHash": "b6f9b78678689eee3d3e00d2cdc215df6a4023283621a818d24a621d15c0521a",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:33.187Z"
+    },
+    "v1.124.0": {
+      "schemaHash": "87f88e1398a24ca49f9977b2d448f443a0e58bcbe2d852a2ba04e593ef687a8a",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:33.538Z"
+    },
+    "v1.123.0": {
+      "schemaHash": "24e81def2e3472c1916758cc277e50dd575d841d165ee320276ca2e6c6305a80",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:33.892Z"
+    },
+    "v1.122.3": {
+      "schemaHash": "ee88369470fe5262898f4c12cb8dd8ad3a600cf207fb5c81eecd1233a8ff339a",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:34.278Z"
+    },
+    "v1.122.2": {
+      "schemaHash": "cdf1072666e1a9d13004e2f61c676b6626f5b3042946ce45144b46cc4840cbc3",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:34.655Z"
+    },
+    "v1.122.1": {
+      "schemaHash": "36dd8dd3af193e45cf5d1caf419aa8f255bcf772520f8e512c2dc45cdd3fa161",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:35.036Z"
+    },
+    "v1.122.0": {
+      "schemaHash": "7ef389c464cf57379baf4c103a272577eb6189739e4523d6e82db9e8d86b4759",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:35.398Z"
+    },
+    "v1.121.0": {
+      "schemaHash": "feefccb3fc66767920b75663521b5663edaa5bed45d9bc4d6b46f4fc25840c12",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:35.783Z"
+    },
+    "v1.120.2": {
+      "schemaHash": "b3562660bb8b7a35f97b8f8fa4e2db0cf3f9a602ff67743f9121e48a69cdf4fc",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:36.150Z"
+    },
+    "v1.120.1": {
+      "schemaHash": "e19b2ae9ef123776daa4f03672d123bcb5fde2487ce7506ec377583288379109",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:36.533Z"
+    },
+    "v1.120.0": {
+      "schemaHash": "adc428e6474186a1c63796d2d31ffed1004336a45aa0821a8aec07c658b09c80",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:36.900Z"
+    },
+    "v1.119.1": {
+      "schemaHash": "b796f1c3a357e7d11c2f541d142fa11d1b03c7efa7a32f0429ade845ca0c9502",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:37.253Z"
+    },
+    "v1.119.0": {
+      "schemaHash": "fd1ae7f9a68e81a6137abc1e3a6a3aa142076a419890fb8580966dad3ad7a768",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:37.594Z"
+    },
+    "v1.118.2": {
+      "schemaHash": "70fdca230f14d3aaca3a1963584d4ded82b5e3405844d503a034c1edcf61c457",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:37.932Z"
+    },
+    "v1.118.1": {
+      "schemaHash": "c46aeb6c180a41229bf241e9898cd0e720debf1f9683fa9a3c93a615f83f1500",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:38.272Z"
+    },
+    "v1.118.0": {
+      "schemaHash": "d9c26a1e4df3aa9b5fbe0570c50b1d97163ce0a3feb7c12bad4841e8e4be4f7b",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:38.689Z"
+    },
+    "v1.117.0": {
+      "schemaHash": "a5c98c5cf35f9b42a412a3aaee7c1e1f597279cc7c8a88cc090d7a7e21aedd26",
+      "validatorCount": 148,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:39.055Z"
+    },
+    "v1.116.2": {
+      "schemaHash": "ff2d4e2a7c35cbcf0ef0b8ca50158bf7711bc200a80f4cdcf0a51208403631c5",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:39.476Z"
+    },
+    "v1.116.1": {
+      "schemaHash": "0b548976224615ba16a694ca2480e86122c817802346ef11b32e49b14cdd199e",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:39.871Z"
+    },
+    "v1.116.0": {
+      "schemaHash": "0119fd0a85433bd9be30265e499c3e6ec1e8471b7c5bb58b74c281e91b5016c0",
+      "validatorCount": 147,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:40.258Z"
+    },
+    "v1.115.0": {
+      "schemaHash": "f4282d8cd8c56f04b93eb85d21556a2016089949eb5f29b4f23ce071f556f887",
+      "validatorCount": 143,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:40.717Z"
+    },
+    "v1.114.0": {
+      "schemaHash": "d239d3ef468fd8261d9bee4ee93ffc0d554d34ee02d4f1c004d909dd382dc4ef",
+      "validatorCount": 143,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:41.083Z"
+    },
+    "v1.113.1": {
+      "schemaHash": "ccc8e8a678a4cc817d35aed6547196b4773257001a42932dc89b25e58e0f964d",
+      "validatorCount": 143,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:41.486Z"
+    },
+    "v1.113.0": {
+      "schemaHash": "b5049f1607dd1b2fa0ba2d9b1f4387302446db23d5b934d5d4f4c5fc9a5ea18a",
+      "validatorCount": 143,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:41.871Z"
+    },
+    "v1.112.1": {
+      "schemaHash": "786813e1daf7b68be631ba9d8ef39042b0205eb953ac60a7df7237b32bf8f872",
+      "validatorCount": 136,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:42.231Z"
+    },
+    "v1.112.0": {
+      "schemaHash": "59b6c6db272bac0e82f3f54f5ee1581381b266e4282f9c0573fbe241c1f9f325",
+      "validatorCount": 136,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:42.606Z"
+    },
+    "v1.111.0": {
+      "schemaHash": "a8f20c40b50caecb672b0c3566d1670fb197f53e533e599e5088e4b5fdb80336",
+      "validatorCount": 136,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:42.967Z"
+    },
+    "v1.110.0": {
+      "schemaHash": "6ea16e2159d77db92596417e7d477e1ddaafb0b2f6b1fabcb19ba9596420180b",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:43.357Z"
+    },
+    "v1.109.2": {
+      "schemaHash": "64fab7eb033b708a549f2fa739b35727cd6b47b3fdccc5962f20520bd76f35ad",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:45.825Z"
+    },
+    "v1.109.1": {
+      "schemaHash": "56e629fc178e12ccef637617a8cc8449583f3bebb373ecf2ff875bd362e70666",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:46.202Z"
+    },
+    "v1.109.0": {
+      "schemaHash": "0c5f6af11c4d2056dacec955c64cbc1187d80f23a12335171046a16fe5bd840c",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:46.563Z"
+    },
+    "v1.108.0": {
+      "schemaHash": "2a790a9cf88fc943764b58b287cdecbf89b87304e49f705f5993f343194301d8",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:46.929Z"
+    },
+    "v1.107.2": {
+      "schemaHash": "fcf1a51e9da3e41e9651265417b58eb63c646d986f07a5bcf75138755c8dae8c",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:47.257Z"
+    },
+    "v1.107.1": {
+      "schemaHash": "0d2bd7e918f37be28f412ebf0fb0347c02bed7563a6a478df46633ec3a5b9747",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:47.623Z"
+    },
+    "v1.107.0": {
+      "schemaHash": "feea53d75fde16fb664f9c3bb1c82b9caa1b049311b64eda7eee24106b4eea29",
+      "validatorCount": 135,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:47.973Z"
+    },
+    "v1.106.4": {
+      "schemaHash": "6a1857c4958bdf24661e0b504ef33831055445516a25eb166495c0d20725f9b2",
+      "validatorCount": 130,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:48.359Z"
+    },
+    "v1.106.3": {
+      "schemaHash": "0344df9b646e556c903febb1db6b8eee23532d39cf1b3b8d95899f73a000bd8a",
+      "validatorCount": 130,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:48.708Z"
+    },
+    "v1.106.2": {
+      "schemaHash": "d166de995c693d074f9420ac5386e8a259b7eec0291569f51903139f1a202c38",
+      "validatorCount": 130,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:49.074Z"
+    },
+    "v1.106.1": {
+      "schemaHash": "47ea41accf3556f9d4401f5525acfb68e727c598bd34edf0a7299283d33f2dca",
+      "validatorCount": 130,
+      "packCount": 5,
+      "generatedAt": "2026-02-16T04:39:49.412Z"
+    },
+    "v1.105.1": {
+      "schemaHash": "c65b02ab6ef58d77093060e03ed5f0e076c3b26db299d6ff19bbe7251e1d5b83",
+      "validatorCount": 122,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:49.783Z"
+    },
+    "v1.105.0": {
+      "schemaHash": "2173f4a6c48cc7c1408cb3ba85dde6bc8b03dd85a0b9bae51f0ddcc1e767538a",
+      "validatorCount": 122,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:50.123Z"
+    },
+    "v1.104.0": {
+      "schemaHash": "8bfdf2c6eda63b722a204b28d13b4b8eed8d25c72c7bacf51a09077513967dab",
+      "validatorCount": 122,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:50.433Z"
+    },
+    "v1.103.1": {
+      "schemaHash": "e8fb925a282e3b7cec23a3df84cd0d870a9b97d72411fdeda4e1ce1d3fe20a0a",
+      "validatorCount": 122,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:50.761Z"
+    },
+    "v1.103.0": {
+      "schemaHash": "b9092bfbbf004102d030c3e2acdf3563dccffe256de26be5dc09812f95a7e532",
+      "validatorCount": 122,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:51.138Z"
+    },
+    "v1.102.3": {
+      "schemaHash": "c2923e6a8ddf8b01b00139a92311c67a77b1c85f13e280d9db585c668861bdbc",
+      "validatorCount": 127,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:51.466Z"
+    },
+    "v1.102.2": {
+      "schemaHash": "3a6985e9b3424adf4b308d692c5c67653fa2f415107148b3ed912f4dcd315d38",
+      "validatorCount": 127,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:51.810Z"
+    },
+    "v1.102.1": {
+      "schemaHash": "11b322a41e50c2e1edf47a90e2eb40b20d2a8d9c59f53f011f0e7e43650bb681",
+      "validatorCount": 127,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:52.154Z"
+    },
+    "v1.102.0": {
+      "schemaHash": "c068eb1075789bdfb34b3d4153fac198839f8374ff93de185cd9661ddc826af8",
+      "validatorCount": 125,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:52.505Z"
+    },
+    "v1.101.0": {
+      "schemaHash": "240b7adef6e0b2056a4f112ed0a586956c8fbca39feb8de8e84c24d452eebf65",
+      "validatorCount": 123,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:52.844Z"
+    },
+    "v1.100.0": {
+      "schemaHash": "7dddf567d64ba909918aa41e4ce09f7480c70f88600de7389a8687c1d1ad20ed",
+      "validatorCount": 117,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:53.181Z"
+    },
+    "v1.99.0": {
+      "schemaHash": "9decebbb38b9ef8aa47cc3550acbd003d271c09ea8d7ae2cf020a450d4e9747b",
+      "validatorCount": 117,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:53.523Z"
+    },
+    "v1.98.2": {
+      "schemaHash": "0922d2cef67068943f21315ffee815526899b82b53447446666e9aad29ea4946",
+      "validatorCount": 116,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:53.860Z"
+    },
+    "v1.98.1": {
+      "schemaHash": "17ce6c519334ed4583962703016bb307f14a09c2b713dd12ee9a3bf71c360f30",
+      "validatorCount": 116,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:54.191Z"
+    },
+    "v1.98.0": {
+      "schemaHash": "cf745ffff39fefba1962aaf0624770fa8877123731ee97a27dddf63edbd6f1e1",
+      "validatorCount": 116,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:54.519Z"
+    },
+    "v1.97.0": {
+      "schemaHash": "534ca580a9424f844057e1a3ef17cf2ed2317b68ede3bfbcfea9e740e3e70a1b",
+      "validatorCount": 116,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:54.846Z"
+    },
+    "v1.96.0": {
+      "schemaHash": "2c43ff799e6dee44759c18441728f63fb54039514ecde77975b2ff27f7f8b26e",
+      "validatorCount": 116,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:55.166Z"
+    },
+    "v1.95.1": {
+      "schemaHash": "3d0340440292a678e67e214946ffd588b450adccc300a972ac704366e9f83a2e",
+      "validatorCount": 115,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:55.510Z"
+    },
+    "v1.95.0": {
+      "schemaHash": "e7bec1a54a418e944b828ef69f8dea2141cd6a262e0f4838cdfb7654199e5a64",
+      "validatorCount": 115,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:55.834Z"
+    },
+    "v1.94.1": {
+      "schemaHash": "001b23217452bfd725ed0c456c051bd66c5737815e5ec5123a16da54556e9650",
+      "validatorCount": 116,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:56.174Z"
+    },
+    "v1.94.0": {
+      "schemaHash": "1f423bbbe2e1022a44d38f9f1972d2dd9e28a089f24a2ef7562f6fbe87c5697c",
+      "validatorCount": 116,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:56.499Z"
+    },
+    "v1.93.3": {
+      "schemaHash": "4396023c8e82b9b713956bfcf4840df12a8f159a5c2719716a72370a9d5c601a",
+      "validatorCount": 113,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:56.840Z"
+    },
+    "v1.93.2": {
+      "schemaHash": "5f9b8da337cc770e160095e5cf6d3c56ea092af6fb546f7181da52eb910a5210",
+      "validatorCount": 113,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:57.149Z"
+    },
+    "v1.93.1": {
+      "schemaHash": "7a8ef7711a2c7d7edce5d0440cb72b2fe7bdb179e7a56e72c8faa32af6ed83d1",
+      "validatorCount": 113,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:57.473Z"
+    },
+    "v1.93.0": {
+      "schemaHash": "d85079d0fb9f034bd0959a4add814821ab4a91ceddb597bff37f57d8499f602f",
+      "validatorCount": 113,
+      "packCount": 4,
+      "generatedAt": "2026-02-16T04:39:57.755Z"
+    }
+  },
+  "releasesEtag": "W/\"bc8d192c3f675a4923d4cbd99ede99300fe01d924101e24f838fdd32c90f7436\"",
+  "releaseTags": [
+    "v2.5.6",
+    "v2.5.5",
+    "v2.5.3",
+    "v2.5.2",
+    "v2.5.0",
+    "v2.4.1",
+    "v2.4.0",
+    "v2.3.1",
+    "v2.3.0",
+    "v2.2.3",
+    "v2.2.2",
+    "v2.2.1",
+    "v2.2.0",
+    "v2.1.0",
+    "v2.0.1",
+    "v2.0.0",
+    "v1.144.1",
+    "v1.143.1",
+    "v1.143.0",
+    "v1.142.1",
+    "v1.142.0",
+    "v1.141.1",
+    "v1.140.1",
+    "v1.140.0",
+    "v1.139.4",
+    "v1.139.3",
+    "v1.139.2",
+    "v1.138.1",
+    "v1.138.0",
+    "v1.137.3",
+    "v1.137.1",
+    "v1.137.0",
+    "v1.136.0",
+    "v1.135.3",
+    "v1.135.2",
+    "v1.135.1",
+    "v1.135.0",
+    "v1.134.0",
+    "v1.133.1",
+    "v1.133.0",
+    "v1.132.3",
+    "v1.132.1",
+    "v1.132.0",
+    "v1.131.3",
+    "v1.131.2",
+    "v1.131.1",
+    "v1.131.0",
+    "v1.130.3",
+    "v1.130.2",
+    "v1.130.1",
+    "v1.130.0",
+    "v1.129.0",
+    "v1.128.0",
+    "v1.127.0",
+    "v1.126.1",
+    "v1.126.0",
+    "v1.125.7",
+    "v1.125.6",
+    "v1.125.5",
+    "v1.125.3",
+    "v1.125.2",
+    "v1.125.1",
+    "v1.124.2",
+    "v1.124.1",
+    "v1.124.0",
+    "v1.123.0",
+    "v1.122.3",
+    "v1.122.2",
+    "v1.122.1",
+    "v1.122.0",
+    "v1.121.0",
+    "v1.120.2",
+    "v1.120.1",
+    "v1.120.0",
+    "v1.119.1",
+    "v1.119.0",
+    "v1.118.2",
+    "v1.118.1",
+    "v1.118.0",
+    "v1.117.0",
+    "v1.116.2",
+    "v1.116.1",
+    "v1.116.0",
+    "v1.115.0",
+    "v1.114.0",
+    "v1.113.1",
+    "v1.113.0",
+    "v1.112.1",
+    "v1.112.0",
+    "v1.111.0",
+    "v1.110.0",
+    "v1.109.2",
+    "v1.109.1",
+    "v1.109.0",
+    "v1.108.0",
+    "v1.107.2",
+    "v1.107.1",
+    "v1.107.0",
+    "v1.106.4",
+    "v1.106.3",
+    "v1.106.2",
+    "v1.106.1",
+    "v1.105.1",
+    "v1.105.0",
+    "v1.104.0",
+    "v1.103.1",
+    "v1.103.0",
+    "v1.102.3",
+    "v1.102.2",
+    "v1.102.1",
+    "v1.102.0",
+    "v1.101.0",
+    "v1.100.0",
+    "v1.99.0",
+    "v1.98.2",
+    "v1.98.1",
+    "v1.98.0",
+    "v1.97.0",
+    "v1.96.0",
+    "v1.95.1",
+    "v1.95.0",
+    "v1.94.1",
+    "v1.94.0",
+    "v1.93.3",
+    "v1.93.2",
+    "v1.93.1",
+    "v1.93.0",
+    "v1.92.1",
+    "v1.92.0",
+    "v1.91.4",
+    "v1.91.3",
+    "v1.91.2",
+    "v1.91.1",
+    "v1.91.0",
+    "v1.90.2",
+    "v1.90.1",
+    "v1.90.0",
+    "v1.89.0",
+    "v1.88.2",
+    "v1.88.1",
+    "v1.88.0",
+    "v1.87.0",
+    "v1.86.0",
+    "v1.85.0",
+    "v1.84.0",
+    "v1.83.0",
+    "v1.82.1",
+    "v1.82.0",
+    "v1.81.1",
+    "v1.81.0",
+    "v1.80.0",
+    "v1.79.1",
+    "v1.79.0",
+    "v1.78.1",
+    "v1.78.0",
+    "v1.77.0",
+    "v1.76.1",
+    "v1.76.0",
+    "v1.75.2",
+    "v1.75.1",
+    "v1.75.0",
+    "v1.74.0",
+    "v1.73.0",
+    "v1.72.2",
+    "v1.72.1",
+    "v1.72.0",
+    "v1.71.0",
+    "v1.70.0",
+    "v1.69.0",
+    "v1.68.0",
+    "v1.67.2",
+    "v1.67.1",
+    "v1.67.0",
+    "v1.66.1",
+    "v1.66.0",
+    "v1.65.0",
+    "v1.64.0",
+    "v1.63.2",
+    "v1.63.0",
+    "v1.62.1",
+    "v1.62.0",
+    "v1.61.0",
+    "v1.60.0",
+    "v1.59.1",
+    "v1.59.0",
+    "v1.58.0",
+    "v1.57.1",
+    "v1.57.0",
+    "v1.56.2",
+    "v1.56.1",
+    "v1.56.0",
+    "v1.55.1",
+    "v1.55.0",
+    "v1.54.1",
+    "v1.54.0",
+    "v1.53.0",
+    "v1.52.1",
+    "v1.52.0",
+    "v1.51.2",
+    "v1.51.1",
+    "v1.51.0",
+    "v1.50.1",
+    "v1.50.0",
+    "v1.49.0",
+    "v1.48.1",
+    "v1.48.0",
+    "v1.47.3",
+    "v1.47.2",
+    "v1.47.0",
+    "v1.46.1",
+    "v1.46.0",
+    "v1.45.0",
+    "v1.44.0",
+    "v1.43.1",
+    "v1.43.0"
+  ]
+}
