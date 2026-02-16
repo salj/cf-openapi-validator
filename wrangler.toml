@@ -1,10 +1,6 @@
-name = "openapi-schema-validator"
 main = "src/worker.ts"
 compatibility_date = "2026-02-15"
 workers_dev = false
-
-[build]
-command = "npm ci --omit=dev --ignore-scripts --prefer-offline --no-audit --fund=false"
 
 [observability]
 enabled = true

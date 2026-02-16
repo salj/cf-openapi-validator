@@ -13,8 +13,8 @@ interface GeneratedMeta {
 export interface VersionRuntime {
   tag?: string;
   tagMeta?: unknown;
-  keyToHash: Record<string, string>;
-  getValidatorByHash: (hash: string) => unknown;
+  keyToValidatorRef: Record<string, string>;
+  getValidatorByRef: (ref: string) => unknown;
 }
 
 interface VersionLoadersRuntime {
@@ -80,22 +80,22 @@ function normalizeVersionLoaders(value: unknown): VersionLoadersRuntime {
 function normalizeVersionRuntime(value: unknown): VersionRuntime | null {
   if (!isRecord(value)) return null;
   if (
-    !isRecord(value.keyToHash) ||
-    typeof value.getValidatorByHash !== "function"
+    !isRecord(value.keyToPackRef) ||
+    typeof value.getValidatorByRef !== "function"
   ) {
     return null;
   }
 
-  const keyToHash: Record<string, string> = {};
-  for (const [k, v] of Object.entries(value.keyToHash)) {
-    if (typeof v === "string") keyToHash[k] = v;
+  const keyToValidatorRef: Record<string, string> = {};
+  for (const [k, v] of Object.entries(value.keyToPackRef)) {
+    if (typeof v === "string") keyToValidatorRef[k] = v;
   }
 
   return {
     tag: typeof value.tag === "string" ? value.tag : undefined,
     tagMeta: value.tagMeta,
-    keyToHash,
-    getValidatorByHash: value.getValidatorByHash as (hash: string) => unknown,
+    keyToValidatorRef,
+    getValidatorByRef: value.getValidatorByRef as (ref: string) => unknown,
   };
 }
 

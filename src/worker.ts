@@ -69,9 +69,9 @@ function findResponseValidator(
   for (const responseKey of responseKeys) {
     for (const mediaType of contentTypeKeys) {
       const key = `${methodUpper} ${pathname} ${responseKey} ${mediaType}`;
-      const hash = versionRuntime.keyToHash[key];
-      if (!hash) continue;
-      const validator = versionRuntime.getValidatorByHash(hash);
+      const validatorRef = versionRuntime.keyToValidatorRef[key];
+      if (!validatorRef) continue;
+      const validator = versionRuntime.getValidatorByRef(validatorRef);
       if (typeof validator === "function") {
         return validator as ValidatorFn;
       }

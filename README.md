@@ -7,7 +7,7 @@ Service-bound Cloudflare Worker for OpenAPI validation
 
 ## Build Model
 
-- Validators are content-addressed shared objects in `artifacts/objects/<sha256>.mjs`.
+- Validators are deduplicated into shared packs in `artifacts/packs/*.mjs`.
 - Each release tag has a composition manifest in `artifacts/tags/<tag>.json`.
 - Generated per-version import modules are in `artifacts/versions/`.
 - Runtime loader index is in `artifacts/versionLoaders.mjs`.

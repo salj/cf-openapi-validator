@@ -12,12 +12,14 @@ interface SourceConfig {
   sourceRepo?: string;
   schemaPath?: string;
   artifactsUserAgent?: string;
+  runtimeVersionLimit?: number;
 }
 
 interface ParsedArgs {
   tag: string | null;
   syncTags: boolean;
   limit: number | null;
+  runtimeLimit: number | null;
   force: boolean;
   requireRelease: boolean;
   configFile: string;
@@ -51,15 +53,15 @@ interface TagManifest {
   openapi: string;
   infoVersion: string | null;
   validatorCount: number;
-  uniqueObjectCount: number;
+  packCount: number;
   generatedAt: string;
-  keyToHash: Record<string, string>;
+  keyToPackRef: Record<string, string>;
 }
 
 interface ManifestTagEntry {
   schemaHash: string;
   validatorCount: number;
-  uniqueObjectCount: number;
+  packCount: number;
   generatedAt: string;
 }
 
@@ -103,11 +105,12 @@ type CompileResult =
       changed: boolean;
       skipped: false;
       meta: TagManifest;
-      newObjects: number;
+      newPacks: number;
     };
 
 let SOURCE_REPO = "";
 let SCHEMA_PATH = "";
+let RUNTIME_VERSION_LIMIT: number | null = null;
 const TAG_RE = /^v\d+\.\d+\.\d+$/;
 const ROOT_SCHEMA_ID = "https://openapi.local/schema.json";
 const COMPILED_SCHEMA_ID_PREFIX = "https://openapi.local/compiled";
@@ -116,7 +119,7 @@ let USER_AGENT =
   "openapi-validator-artifact-builder";
 
 const ARTIFACTS_DIR = path.resolve("artifacts");
-const OBJECTS_DIR = path.join(ARTIFACTS_DIR, "objects");
+const PACKS_DIR = path.join(ARTIFACTS_DIR, "packs");
 const TAGS_DIR = path.join(ARTIFACTS_DIR, "tags");
 const MANIFEST_PATH = path.join(ARTIFACTS_DIR, "manifest.json");
 
@@ -141,7 +144,9 @@ function isOpenApiSchema(value: unknown): value is OpenApiSchema {
 function isTagManifest(value: unknown): value is TagManifest {
   if (!isObjectRecord(value)) return false;
   if (typeof value.tag !== "string") return false;
-  if (!isObjectRecord(value.keyToHash)) return false;
+  if (!isObjectRecord(value.keyToPackRef)) {
+    return false;
+  }
   return true;
 }
 
@@ -192,6 +197,13 @@ async function loadSourceConfig(configFile: string): Promise<void> {
     config.artifactsUserAgent
   )
     USER_AGENT = config.artifactsUserAgent;
+  if (
+    typeof config.runtimeVersionLimit === "number" &&
+    Number.isFinite(config.runtimeVersionLimit) &&
+    config.runtimeVersionLimit >= 0
+  ) {
+    RUNTIME_VERSION_LIMIT = Math.floor(config.runtimeVersionLimit);
+  }
 }
 
 function parseArgs(argv: string[]): ParsedArgs {
@@ -199,6 +211,7 @@ function parseArgs(argv: string[]): ParsedArgs {
     tag: null,
     syncTags: false,
     limit: null,
+    runtimeLimit: null,
     force: false,
     requireRelease: false,
     configFile: ".openapi/source.json",
@@ -213,6 +226,9 @@ function parseArgs(argv: string[]): ParsedArgs {
       parsed.syncTags = true;
     } else if (arg === "--limit") {
       parsed.limit = Number(argv[i + 1] || 0) || null;
+      i += 1;
+    } else if (arg === "--runtime-limit") {
+      parsed.runtimeLimit = Number(argv[i + 1] || 0) || null;
       i += 1;
     } else if (arg === "--force") {
       parsed.force = true;
@@ -460,7 +476,7 @@ function collectResponseSchemaEntries(
 
 function buildResponseValidatorModule(
   sourceSchema: OpenApiSchema,
-  ref: string,
+  entries: ResponseSchemaEntry[],
 ): string {
   const ajv = new Ajv({
     strict: false,
@@ -472,15 +488,19 @@ function buildResponseValidatorModule(
     },
   });
 
-  const normalizedRefHash = sha256(ref);
-  const schemaId = `${COMPILED_SCHEMA_ID_PREFIX}/${normalizedRefHash}.json`;
-
   ajv.addSchema(sourceSchema, ROOT_SCHEMA_ID);
-  ajv.addSchema({ $id: schemaId, $ref: ref }, schemaId);
-  ajv.getSchema(schemaId);
+  const refsByExport: Record<string, string> = {};
 
-  const moduleCode = standaloneCode(ajv, { validate: schemaId });
-  return `${moduleCode}\nexport default validate;\n`;
+  for (let i = 0; i < entries.length; i += 1) {
+    const entry = entries[i] as ResponseSchemaEntry;
+    const schemaId = `${COMPILED_SCHEMA_ID_PREFIX}/${sha256(entry.ref)}.json`;
+    const exportName = `v${i}`;
+    ajv.addSchema({ $id: schemaId, $ref: entry.ref }, schemaId);
+    ajv.getSchema(schemaId);
+    refsByExport[exportName] = schemaId;
+  }
+
+  return `${standaloneCode(ajv, refsByExport)}\n`;
 }
 
 async function fetchSchemaForTag(
@@ -520,29 +540,37 @@ async function compileTag(tag: string, force: boolean): Promise<CompileResult> {
     ROOT_SCHEMA_ID,
   );
 
-  const keyToHash: Record<string, string> = {};
-  let newObjects = 0;
+  const CHUNK_SIZE = 32;
+  const keyToPackRef: Record<string, string> = {};
+  let newPacks = 0;
 
-  for (const entry of responseEntries) {
-    const moduleCode = buildResponseValidatorModule(sourceSchema, entry.ref);
-    const codeHash = sha256(moduleCode);
-    keyToHash[entry.key] = codeHash;
+  for (let offset = 0; offset < responseEntries.length; offset += CHUNK_SIZE) {
+    const chunkEntries = responseEntries.slice(offset, offset + CHUNK_SIZE);
+    const moduleCode = buildResponseValidatorModule(sourceSchema, chunkEntries);
+    const packHash = sha256(moduleCode);
+    const packPath = path.join(PACKS_DIR, `${packHash}.mjs`);
 
-    const objectPath = path.join(OBJECTS_DIR, `${codeHash}.mjs`);
     let existed = true;
     try {
-      await readFile(objectPath, "utf8");
+      await readFile(packPath, "utf8");
     } catch {
       existed = false;
     }
 
     if (!existed || force) {
-      const changed = await writeIfChanged(objectPath, moduleCode);
-      if (changed && !existed) newObjects += 1;
+      const changed = await writeIfChanged(packPath, moduleCode);
+      if (changed && !existed) newPacks += 1;
+    }
+
+    for (let i = 0; i < chunkEntries.length; i += 1) {
+      const entry = chunkEntries[i] as ResponseSchemaEntry;
+      keyToPackRef[entry.key] = `${packHash}#v${i}`;
     }
   }
 
-  const uniqueHashes = new Set(Object.values(keyToHash));
+  const uniquePackHashes = new Set(
+    Object.values(keyToPackRef).map((value) => value.split("#", 1)[0]),
+  );
   const tagManifest: TagManifest = {
     source: SOURCE_REPO,
     tag,
@@ -551,9 +579,9 @@ async function compileTag(tag: string, force: boolean): Promise<CompileResult> {
     openapi: parsed.openapi,
     infoVersion: parsed.info?.version || null,
     validatorCount: responseEntries.length,
-    uniqueObjectCount: uniqueHashes.size,
+    packCount: uniquePackHashes.size,
     generatedAt: new Date().toISOString(),
-    keyToHash,
+    keyToPackRef,
   };
 
   const changed = await writeIfChanged(
@@ -566,7 +594,7 @@ async function compileTag(tag: string, force: boolean): Promise<CompileResult> {
     changed,
     skipped: false,
     meta: tagManifest,
-    newObjects,
+    newPacks,
   };
 }
 
@@ -594,20 +622,30 @@ function buildVersionModuleSource(
   tag: string,
   tagManifest: TagManifest,
 ): string {
-  const uniqueHashes = Array.from(
-    new Set(Object.values(tagManifest.keyToHash)),
+  const keyToPackRef = tagManifest.keyToPackRef;
+  const uniquePacks = Array.from(
+    new Set(
+      Object.values(keyToPackRef)
+        .map((value) =>
+          typeof value === "string" ? value.split("#", 1)[0] : null,
+        )
+        .filter((value): value is string => typeof value === "string"),
+    ),
   ).sort();
   const imports: string[] = [];
-  const hashConstNames: Record<string, string> = {};
+  const packConstNames: Record<string, string> = {};
 
-  uniqueHashes.forEach((hash, index) => {
-    const constName = `h${index}`;
-    hashConstNames[hash] = constName;
-    imports.push(`import ${constName} from '../objects/${hash}.mjs';`);
+  uniquePacks.forEach((packHash, index) => {
+    const constName = `p${index}`;
+    packConstNames[packHash] = constName;
+    imports.push(`import * as ${constName} from '../packs/${packHash}.mjs';`);
   });
 
-  const validatorsByHashLines = uniqueHashes
-    .map((hash) => `  ${JSON.stringify(hash)}: ${hashConstNames[hash]}`)
+  const packsByHashLines = uniquePacks
+    .map(
+      (packHash) =>
+        `  ${JSON.stringify(packHash)}: ${packConstNames[packHash]}`,
+    )
     .join(",\n");
 
   return `${imports.join("\n")}\n\nexport const tag = ${JSON.stringify(tag)};\nexport const tagMeta = ${JSON.stringify(
@@ -619,30 +657,31 @@ function buildVersionModuleSource(
       openapi: tagManifest.openapi,
       infoVersion: tagManifest.infoVersion,
       validatorCount: tagManifest.validatorCount,
-      uniqueObjectCount: tagManifest.uniqueObjectCount,
+      packCount: tagManifest.packCount,
       generatedAt: tagManifest.generatedAt,
     },
     null,
     2,
-  )};\n\nexport const keyToHash = ${JSON.stringify(tagManifest.keyToHash, null, 2)};\n\nconst validatorsByHash = {\n${validatorsByHashLines}\n};\n\nexport function getValidatorByHash(hash) {\n  return validatorsByHash[hash] || null;\n}\n\nexport default {\n  tag,\n  tagMeta,\n  keyToHash,\n  getValidatorByHash\n};\n`;
+  )};\n\nexport const keyToPackRef = ${JSON.stringify(keyToPackRef, null, 2)};\n\nconst packModules = {\n${packsByHashLines}\n};\n\nexport function getValidatorByRef(ref) {\n  if (typeof ref !== 'string') return null;\n  const splitIndex = ref.indexOf('#');\n  if (splitIndex <= 0 || splitIndex >= ref.length - 1) return null;\n  const packHash = ref.slice(0, splitIndex);\n  const exportName = ref.slice(splitIndex + 1);\n  const pack = packModules[packHash];\n  if (!pack) return null;\n  const validator = pack[exportName];\n  return typeof validator === 'function' ? validator : null;\n}\n\nexport default {\n  tag,\n  tagMeta,\n  keyToPackRef,\n  getValidatorByRef\n};\n`;
 }
 
 async function regenerateGeneratedRuntime(
   knownTags: Set<string>,
   latestTag: string,
+  runtimeLimit: number | null,
 ): Promise<void> {
   await mkdir(GENERATED_VERSIONS_DIR, { recursive: true });
 
   const sortedTags = sortTagsDesc(Array.from(knownTags));
+  const runtimeTags =
+    runtimeLimit && runtimeLimit > 0
+      ? sortedTags.slice(0, runtimeLimit)
+      : sortedTags;
   let latestTagManifest: TagManifest | null = null;
 
-  for (const tag of sortedTags) {
+  for (const tag of runtimeTags) {
     const tagManifest = await loadTagManifest(tag);
-    if (
-      !tagManifest ||
-      !tagManifest.keyToHash ||
-      typeof tagManifest.keyToHash !== "object"
-    ) {
+    if (!tagManifest || !isObjectRecord(tagManifest.keyToPackRef)) {
       throw new Error(`Missing or invalid tag manifest for ${tag}`);
     }
 
@@ -656,14 +695,14 @@ async function regenerateGeneratedRuntime(
     if (tag === latestTag) latestTagManifest = tagManifest;
   }
 
-  const loaderLines = sortedTags
+  const loaderLines = runtimeTags
     .map(
       (tag) =>
         `  ${JSON.stringify(tag)}: () => import('./versions/${tagToModuleName(tag)}.mjs')`,
     )
     .join(",\n");
 
-  const loaderSource = `export const availableVersions = ${JSON.stringify(sortedTags)};\nexport const latestVersion = ${JSON.stringify(
+  const loaderSource = `export const availableVersions = ${JSON.stringify(runtimeTags)};\nexport const latestVersion = ${JSON.stringify(
     latestTag,
   )};\n\nconst LOADERS = {\n${loaderLines}\n};\n\nexport function hasVersion(tag) {\n  return typeof LOADERS[tag] === 'function';\n}\n\nexport async function loadVersionModule(tag) {\n  const load = LOADERS[tag];\n  if (!load) return null;\n  const mod = await load();\n  return mod.default || mod;\n}\n`;
 
@@ -674,7 +713,7 @@ async function regenerateGeneratedRuntime(
       {
         source: SOURCE_REPO,
         latestTag,
-        availableVersions: sortedTags,
+        availableVersions: runtimeTags,
         generatedAt: latestTagManifest?.generatedAt || null,
       },
       null,
@@ -699,6 +738,17 @@ async function main(): Promise<void> {
   await loadSourceConfig(args.configFile);
   assertConfig();
   const manifest = await loadManifest();
+  const envRuntimeLimit = Number(
+    process.env.OPENAPI_RUNTIME_MAX_VERSIONS || "",
+  );
+  const runtimeLimit =
+    args.runtimeLimit ??
+    (Number.isFinite(envRuntimeLimit) && envRuntimeLimit > 0
+      ? Math.floor(envRuntimeLimit)
+      : null) ??
+    (RUNTIME_VERSION_LIMIT && RUNTIME_VERSION_LIMIT > 0
+      ? RUNTIME_VERSION_LIMIT
+      : 30);
   if (manifest.source !== SOURCE_REPO || manifest.schemaPath !== SCHEMA_PATH) {
     manifest.missingSchemaCutoffTag = null;
   }
@@ -708,7 +758,7 @@ async function main(): Promise<void> {
   }
 
   await mkdir(ARTIFACTS_DIR, { recursive: true });
-  await mkdir(OBJECTS_DIR, { recursive: true });
+  await mkdir(PACKS_DIR, { recursive: true });
   await mkdir(TAGS_DIR, { recursive: true });
 
   let tagsToProcess: string[] = [];
@@ -803,7 +853,7 @@ async function main(): Promise<void> {
         console.log(`Skipped ${tag} (already compiled)`);
       } else if ("meta" in result) {
         console.log(
-          `Compiled ${tag} (${result.meta.validatorCount} validators, ${result.newObjects} new shared objects)`,
+          `Compiled ${tag} (${result.meta.validatorCount} validators, ${result.newPacks} new shared packs)`,
         );
       }
       havePriorTag = true;
@@ -831,7 +881,12 @@ async function main(): Promise<void> {
   }
 
   const latestTag = sortTagsDesc(Array.from(knownTags))[0] as string;
-  await regenerateGeneratedRuntime(knownTags, latestTag);
+  await regenerateGeneratedRuntime(knownTags, latestTag, runtimeLimit);
+  if (runtimeLimit && knownTags.size > runtimeLimit) {
+    console.log(
+      `Runtime bundle limited to latest ${runtimeLimit} versions (stored tags: ${knownTags.size}).`,
+    );
+  }
 
   manifest.source = SOURCE_REPO;
   manifest.schemaPath = SCHEMA_PATH;
@@ -847,7 +902,7 @@ async function main(): Promise<void> {
     manifest.tags[tag] = {
       schemaHash: tagManifest.schemaHash,
       validatorCount: tagManifest.validatorCount,
-      uniqueObjectCount: tagManifest.uniqueObjectCount,
+      packCount: tagManifest.packCount,
       generatedAt: tagManifest.generatedAt,
     };
     if (tag === latestTag) latestGeneratedAt = tagManifest.generatedAt;

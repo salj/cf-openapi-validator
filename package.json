@@ -5,8 +5,8 @@
   "main": "src/worker.ts",
   "scripts": {
     "start": "wrangler dev",
-    "test": "tsx --test test/**/*.test.ts",
-    "test:fast": "tsx --test test/**/*.test.ts",
+    "test": "node scripts/bootstrap-test-artifacts.mjs && XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs vitest run",
+    "test:fast": "node scripts/bootstrap-test-artifacts.mjs && XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs vitest run",
     "check:types": "tsc -p tsconfig.scripts.json --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -39,7 +39,6 @@
     "npm-check-updates": "^19.3.2",
     "oxlint": "^1.47.0",
     "prettier": "^3.8.1",
-    "tsx": "^4.21.0",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.55.0",
     "vitest": "^3.2.4",
@@ -50,6 +49,9 @@
     "ajv": "^8.18.0"
   },
   "knip": {
+    "ignoreDependencies": [
+      "cloudflare"
+    ],
     "project": [
       "src/**/*.ts"
     ]
