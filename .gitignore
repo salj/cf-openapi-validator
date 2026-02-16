@@ -1,0 +1,24 @@
+dist/
+
+# Dependencies
+node_modules/
+
+# Local environment and Wrangler state
+.dev.vars
+.wrangler/
+
+# Logs and coverage
+*.log
+coverage/
+.nyc_output/
+
+# Tool caches
+.eslintcache
+*.tsbuildinfo
+
+# Generated artifacts (committed via force-add on source branches)
+artifacts/
+
+# OS/editor noise
+.DS_Store
+.vscode/

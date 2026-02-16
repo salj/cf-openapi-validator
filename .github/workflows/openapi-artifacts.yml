@@ -1,0 +1,89 @@
+name: OpenAPI Validator Artifacts
+run-name: OpenAPI artifacts - ${{ github.event_name }} - ${{ github.ref_name }}
+
+on:
+  create:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: openapi-artifacts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-artifacts:
+    if: ${{ github.event_name != 'create' || (github.event.ref_type == 'branch' && startsWith(github.event.ref, 'openapi-source/')) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Detect configured branches via GitHub API
+        uses: actions/github-script@v7
+        env:
+          OPENAPI_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const defaultBranch = process.env.OPENAPI_DEFAULT_BRANCH || 'master';
+            const sourcePrefix = 'openapi-source/';
+            const configured = [];
+
+            const branches = await github.paginate(github.rest.repos.listBranches, {
+              owner,
+              repo,
+              per_page: 100
+            });
+
+            for (const branch of branches) {
+              const name = branch.name;
+              if (name === defaultBranch) continue;
+              if (!name.startsWith(sourcePrefix)) continue;
+              try {
+                await github.rest.repos.getContent({
+                  owner,
+                  repo,
+                  path: '.openapi/source.json',
+                  ref: name
+                });
+                configured.push(name);
+              } catch (error) {
+                if (error.status !== 404) throw error;
+              }
+            }
+
+            core.info(`Configured branches: ${configured.length ? configured.join(', ') : '(none)'}`);
+            if (configured.length === 0) {
+              core.setFailed('No openapi-source/* branches contain .openapi/source.json');
+            }
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --omit=dev --ignore-scripts --prefer-offline --no-audit --fund=false
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update configured source branches
+        env:
+          OPENAPI_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run openapi:update-branches -- --allow-force-push

@@ -1,0 +1,66 @@
+{
+  "name": "openapi-schema-validator-worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/worker.ts",
+  "scripts": {
+    "start": "wrangler dev",
+    "test": "tsx --test test/**/*.test.ts",
+    "test:fast": "tsx --test test/**/*.test.ts",
+    "check:types": "tsc -p tsconfig.scripts.json --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:ox": "oxlint .",
+    "lint:ox:fix": "oxlint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "analyze:dead": "knip",
+    "deps:check": "ncu",
+    "deps:update": "ncu -u",
+    "quality": "npm run check:types && npm run lint && npm run lint:ox && npm run analyze:dead && npm run test:fast",
+    "openapi:artifacts": "node --no-warnings=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/build-openapi-artifacts.ts",
+    "openapi:artifacts:all": "node --no-warnings=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/build-openapi-artifacts.ts --sync-tags",
+    "prepare": "husky",
+    "openapi:update-branches": "bash scripts/update-configured-branches.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.12.12",
+    "@cloudflare/workers-types": "^4.20240208.0",
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^25.2.3",
+    "eslint": "^9.39.2",
+    "globals": "^17.3.0",
+    "husky": "^9.1.7",
+    "knip": "^5.83.1",
+    "lint-staged": "^16.2.7",
+    "npm-check-updates": "^19.3.2",
+    "oxlint": "^1.47.0",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^8.55.0",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.65.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.1",
+    "ajv": "^8.18.0"
+  },
+  "knip": {
+    "project": [
+      "src/**/*.ts"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

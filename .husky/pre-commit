@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+set -eu
+
+bash scripts/guard-master-config.sh
+
+current_branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+case "$current_branch" in
+  openapi-source/*) exit 0 ;;
+esac
+
+npx lint-staged
+npm run check:types
+
+if git diff --cached --name-only | grep -Ev '^(\\.openapi/source\\.json|artifacts/)' | grep -q '.'; then
+  npm run analyze:dead
+fi
